@@ -14,7 +14,7 @@ import config from '../config.js'
 import CommandManager from '@managers/CommandManager'
 import EventManager from '@managers/EventManager'
 import ErrorManager from '@managers/ErrorManager'
-import DatabaseManager from '@managers/DatabaseManager'
+import KakaoManager from '@managers/KakaoManager'
 import InteractionManager from '@managers/InteractionManager'
 
 const logger = new Logger('bot')
@@ -35,7 +35,7 @@ export default class BotClient extends Client {
   public command: CommandManager = new CommandManager(this)
   public event: EventManager = new EventManager(this)
   public error: ErrorManager = new ErrorManager(this)
-  public database: DatabaseManager = new DatabaseManager(this)
+  public kakao: KakaoManager = new KakaoManager(this)
   public interaction: InteractionManager = new InteractionManager(this)
   public dokdo: Dokdo = new Dokdo(this, {
     prefix: this.config.bot.prefix,
@@ -53,7 +53,7 @@ export default class BotClient extends Client {
     this.event.load()
     this.command.load()
     this.interaction.load()
-    this.database.load()
+    this.kakao.load()
 
     logger.info('Loading version data...')
     this.VERSION = config.BUILD_VERSION

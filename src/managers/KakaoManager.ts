@@ -1,7 +1,6 @@
 import Logger from '@utils/Logger'
 import BaseManager from './BaseManager.js'
 import BotClient from '@structures/BotClient'
-import { PrismaClient } from '@prisma/client'
 
 /**
  * @extends {BaseManager}
@@ -9,6 +8,7 @@ import { PrismaClient } from '@prisma/client'
 export default class DatabaseManager extends BaseManager {
   private logger: Logger
 
+  public Endpoint = 'https://demo-vox-proxy.i.kakao.com/v1/ttsURL'
   constructor(client: BotClient) {
     super(client)
 
@@ -16,12 +16,6 @@ export default class DatabaseManager extends BaseManager {
   }
 
   async load() {
-    this.logger.debug('Using Prisma...')
-
-    this.client.db = new PrismaClient()
-
-    this.client.db.$connect().then(() => {
-      this.logger.info('Connected to Prisma')
-    })
+    this.logger.debug('Loading kakao api')
   }
 }
